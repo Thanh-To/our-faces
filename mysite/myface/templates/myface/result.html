@@ -3,32 +3,57 @@
 <head>
 	{% load static %}
 
-    {% if scores %}
-        <center><h1>Your engineering ranking: </h1></center>
-
-        {% for score in scores %}
-            {% if score == "ECE" %}
-                <center><a href="https://www.ece.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
-            {% elif score == "CHBE" %}
-                <center><a href="https://www.chbe.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
-            {% elif score == "ENV" %}
-                <center><a href="https://www.enve.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
-            {% elif score == "IGEN" %}
-                <center><a href="https://www.igen.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
-            {% elif score == "GEO" %}
-                <center><a href="https://www.geoeng.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
-            {% elif score == "CIVL" %}
-                <center><a href="https://www.civil.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
-            {% elif score == "FIZZ" %}
-                <center><a href="https://www.engphys.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
-            {% elif score == "MTRL" %}
-                <center><a href="https://www.mtrl.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
-            {% elif score == "MINE" %}
-                <center><a href="https://www.mining.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
-            {% elif score == "MECH" %}
-                <center><a href="https://www.mech.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
-            {% endif %}
-        {% endfor %}
+    {% if multiple %}
+        <center><h1>We detected too many faces, try finding a more secluded area and try again!</h1></center>
+    {% elif scores %}
+        <center>
+        <div style="width: 100%; display: table;">
+            <div style="display: table-row">
+                <div style="display: table-cell;">
+                    <!-- Most similar face -->
+                    <div id="mostSimilarFace">
+                        <center><h1>You look most similar to:</h1></center>
+                            <p>The average {{scores.0}} student</p>
+                            <img src="{% static 'images/averages/average_face_'|add:scores.0|add:'.jpg' %}"/>
+                        <center>
+                    </div>
+                </div>
+                <div style="display: table-cell;">
+                    <!-- Ranking-->
+                    <div id="ranking">
+                        <center><h1>Your engineering ranking:</h1></center>
+                        {% for score in scores %}
+                            {% if score == "ECE" %}
+                                <center><a href="https://www.ece.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
+                            {% elif score == "CHBE" %}
+                                <center><a href="https://www.chbe.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
+                            {% elif score == "ENV" %}
+                                <center><a href="https://www.enve.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
+                            {% elif score == "IGEN" %}
+                                <center><a href="https://www.igen.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
+                            {% elif score == "GEO" %}
+                                <center><a href="https://www.geoeng.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
+                            {% elif score == "CIVL" %}
+                                <center><a href="https://www.civil.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
+                            {% elif score == "FIZZ" %}
+                                <center><a href="https://www.engphys.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
+                            {% elif score == "MTRL" %}
+                                <center><a href="https://www.mtrl.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
+                            {% elif score == "MINE" %}
+                                <center><a href="https://www.mining.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
+                            {% elif score == "MECH" %}
+                                <center><a href="https://www.mech.ubc.ca/">{{forloop.counter}}. {{score}}</a></center>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        </center>
+        
+        
+    {% else %}
+        <center><h1>We couldn't detect any faces! Try again.</h1></center>
     {% endif %}
 
     <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">

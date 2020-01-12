@@ -34,9 +34,16 @@ def testcall(request):
     client = vision.ImageAnnotatorClient()
 
     with open(filename, 'rb') as image:
-        faces = detect_face(image, 1)
+        faces = detect_face(image)
         print('Found {} face{}'.format(
             len(faces), '' if len(faces) == 1 else 's'))
+
+        if len(faces) > 1:
+            context = {'multiple': True}
+            return render(request, "myface/result.html", context)
+        elif len(faces) == 0:
+            context = {}
+            return render(request, "myface/result.html", context)
 
         print('Writing to file {}'.format(filename))
         # Reset the file pointer, so we can read the file again
@@ -49,7 +56,7 @@ def testcall(request):
     sift = cv.xfeatures2d.SIFT_create()
 
     inputImg = cv.imread('webScreenshot.jpg',cv.IMREAD_GRAYSCALE)
-    comparisonImagesPath = 'averages/'
+    comparisonImagesPath = 'myface/static/images/averages/'
 
     for subdir, dirs, files in os.walk(comparisonImagesPath):
         for file in files:
