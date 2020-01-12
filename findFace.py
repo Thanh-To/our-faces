@@ -23,8 +23,8 @@ else:
             faces = faceCascade.detectMultiScale(gray, 1.3, 5)
 
             for (x,y,width,height) in faces:
-                    newX = int(round(x-width*0.3))
-                    newY = int(round(y-height*0.3))
+                    newX = max(0,int(round(x-width*0.3)))
+                    newY = max(0,int(round(y-height*0.3)))
                     newWidth = int(round(width+2*width*0.3))
                     newHeight = int(round(height+2*height*0.3))
                     newImg = img[newY:newY+newHeight, newX:newX+newWidth]
