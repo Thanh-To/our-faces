@@ -10,12 +10,10 @@
 
 // Put variables in global scope to make them available to the browser console.
 const video = document.querySelector('video');
-const canvas = window.canvas = document.querySelector('canvas');
-canvas.width = 480;
-canvas.height = 360;
 
 const button = document.querySelector('button');
 button.onclick = function() {
+  var canvas = document.createElement('canvas');
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
   canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -28,7 +26,7 @@ button.onclick = function() {
     data: { csrfmiddlewaretoken: '{{ csrf_token }}',
             img: img},
     success: function callback(response) {
-        alert(response);
+      document.getElementById('myform').innerHTML = response;
     }
   });
 

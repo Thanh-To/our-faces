@@ -27,7 +27,8 @@ else:
                     newY = max(0,int(round(y-height*0.3)))
                     newWidth = int(round(width+2*width*0.3))
                     newHeight = int(round(height+2*height*0.3))
-                    newImg = img[newY:newY+newHeight, newX:newX+newWidth]
+                    #newImg = img[newY:newY+newHeight, newX:newX+newWidth]
+                    newImg = img[y:y+height, x:x+width]
                     filename = 'face' + str(filenum) + '.jpg'
                     cv2.imwrite(os.path.join(destinationFolderPath, filename), newImg)
                     filenum += 1

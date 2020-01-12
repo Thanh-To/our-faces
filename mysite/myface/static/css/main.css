@@ -38,6 +38,7 @@
     margin: 0;
     padding: 1em;
     word-break: break-word;
+    background-color: #000000
   }
   
   button {
@@ -94,6 +95,7 @@
     font-weight: 500;
     margin: 0 0 0.8em 0;
     padding: 0 0 0.2em 0;
+    color: #f54242;
   }
   
   h2 {
@@ -174,7 +176,7 @@
   }
   
   a {
-    color: #6fa8dc;
+    color: #f54242;
     font-weight: 300;
     text-decoration: none;
   }
@@ -186,7 +188,7 @@
   }
   
   a:hover {
-    color: #3d85c6;
+    color: #ffffff;
     text-decoration: underline;
   }
   
@@ -227,7 +229,7 @@
   video {
     background: #222;
     margin: 0 0 20px 0;
-    --width: 100%;
+    --width: 50%;
     width: var(--width);
     height: calc(var(--width) * 0.75);
   }
