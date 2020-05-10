@@ -14,16 +14,19 @@ def stackImagesAboutCenter(mode, canvasSize, images):
     centeredImages = []
 
     for image in images:
-        w, h, rgb = image.shape
-        cw, ch = (int(round(w/2)), int(round(h/2)))
-        ow, oh = (int(round(canvasSize/2))-cw, int(round(canvasSize/2))-ch)
+        try:
+            w, h, rgb = image.shape
+            cw, ch = (int(round(w/2)), int(round(h/2)))
+            ow, oh = (int(round(canvasSize/2))-cw, int(round(canvasSize/2))-ch)
 
-        centeredImage = canvas.copy()
-        centeredImage[oh:oh+h, ow:ow+w] = image
+            centeredImage = canvas.copy()
+            centeredImage[oh:oh+h, ow:ow+w] = image
 
-        if mode == "MODE":
-            centeredImage = cv2.cvtColor(centeredImage, cv2.COLOR_BGR2GRAY)
-        centeredImages.append(centeredImage)
+            if mode == "MODE":
+                centeredImage = cv2.cvtColor(centeredImage, cv2.COLOR_BGR2GRAY)
+            centeredImages.append(centeredImage)
+        except:
+            print('An error has occurred, skipping...')
 
     if mode == 'MEDIAN':
         result = np.median(centeredImages, axis=0)
