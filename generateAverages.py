@@ -2,7 +2,7 @@ import subprocess
 import os
 import sys
 
-new_dir_name = 'averages';
+new_dir_name = 'averages'
 
 argumentCount = len(sys.argv) - 1
 if argumentCount != 1:
@@ -22,7 +22,7 @@ else:
     		print("Processing " + sourceFolderPath)
 
     		print("Finding all faces")
-    		subprocess.call("python3 findFace.py " + dir + " " + sourceFolderPath, shell=True)
+    		subprocess.call("python3 findFaces.py " + dir + " " + sourceFolderPath, shell=True)
 
     		print("Extracting all facial features")
     		subprocess.call("python3 ../average-faces-opencv/extract.py ../average-faces-opencv/shape_predictor_68_face_landmarks.dat " + dir, shell=True)
