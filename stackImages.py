@@ -14,6 +14,7 @@ def stackImagesAboutCenter(mode, canvasSize, images):
     centeredImages = []
 
     for image in images:
+
         try:
             w, h, rgb = image.shape
             cw, ch = (int(round(w/2)), int(round(h/2)))
@@ -25,8 +26,9 @@ def stackImagesAboutCenter(mode, canvasSize, images):
             if mode == "MODE":
                 centeredImage = cv2.cvtColor(centeredImage, cv2.COLOR_BGR2GRAY)
             centeredImages.append(centeredImage)
-        except:
+        except Exception as e:
             print('An error has occurred, skipping...')
+            print(e)
 
     if mode == 'MEDIAN':
         result = np.median(centeredImages, axis=0)
@@ -40,25 +42,22 @@ def stackImagesAboutCenter(mode, canvasSize, images):
     return result
 
 
-argumentCount = len(sys.argv) - 1
-if argumentCount != 4:
-    print("usage: python stackImages.py [mode (MEDIAN, MEAN)] [squareCanvasSize] [destinationFilePath] [sourceFolderPath]")
-else:
-    mode = sys.argv[1]
-    canvasSize = int(sys.argv[2])
-    destinationFilePath = sys.argv[3]
-    folderPath = sys.argv[4]
+# argumentCount = len(sys.argv) - 1
+# if argumentCount != 4:
+#     print("usage: python stackImages.py [mode (MEDIAN, MEAN)] [squareCanvasSize] [destinationFilePath] [sourceFolderPath]")
+# else:
+#     mode = sys.argv[1]
+#     canvasSize = int(sys.argv[2])
+#     destinationFilePath = sys.argv[3]
+#     folderPath = sys.argv[4]
 
-    images = []
+#     images = []
 
-    for file in os.listdir(folderPath):
-        if file.endswith(".jpg"):
-            print(os.path.join(folderPath, file))
-            image = cv2.imread(os.path.join(folderPath, file))
-            images.append(image)
+#     for file in os.listdir(folderPath):
+#         if file.endswith(".JPG"):
+#             print(os.path.join(folderPath, file))
+#             image = cv2.imread(os.path.join(folderPath, file))
+#             images.append(image)
 
-    result = stackImagesAboutCenter(mode, canvasSize, images)
-    cv2.imwrite(destinationFilePath, result)
-
-
-                
+#     result = stackImagesAboutCenter(mode, canvasSize, images)
+#     cv2.imwrite(destinationFilePath, result)
